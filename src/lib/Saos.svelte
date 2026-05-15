@@ -1,6 +1,5 @@
 <script>
-  import { onMount } from "svelte";
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onMount } from "svelte";
 
   export let animation = "none";
   export let animation_out = "none; opacity: 0";
@@ -9,6 +8,8 @@
   export let bottom = 0;
   export let css_observer = "";
   export let css_animation = "";
+  export let outerClass = "";
+  export let innerClass = "";
 
   // cute litle reactive dispatch to get if is observing :3
   const dispatch = createEventDispatcher();
@@ -67,13 +68,13 @@
   });
 </script>
 
-<div id={countainer} style={css_observer}>
+<div id={countainer} style={css_observer} class={outerClass}>
   {#if observing}
-    <div style="animation: {animation}; {css_animation}">
+    <div style="animation: {animation}; {css_animation}" class={innerClass}>
       <slot />
     </div>
   {:else}
-    <div style="animation: {animation_out}; {css_animation}">
+    <div style="animation: {animation_out}; {css_animation}" class={innerClass}>
       <slot />
     </div>
   {/if}
